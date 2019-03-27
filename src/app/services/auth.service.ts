@@ -23,8 +23,14 @@ export class AuthService {
 
   }
 
-  register(data): Observable<User> {
+  register(data: AuthDTO): Observable<User> {
     return this.auth('register', data);
+  }
+
+  whoami() {
+    return this.http.get(`${this.api}/whoami`, {
+      headers: {authorization: `Bearer ${this.token}`}
+    });
   }
 
   get token(): string {
