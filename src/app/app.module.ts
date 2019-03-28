@@ -10,14 +10,18 @@ import { ApiService } from '@app/services/api.service';
 import { AppStoreModule } from '@app/store/app-store.module';
 import { AuthComponent } from './components/auth/auth.component';
 import { UIModule } from '@app/ui.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent
+    AuthComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
