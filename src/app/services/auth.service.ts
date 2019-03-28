@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { AuthDTO, AuthType } from '@app/models/auth';
 import {User} from '@app/models/user';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,16 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   private auth(authType: AuthType, data: AuthDTO): Observable<User> {
-    return this.http.post<User>(`${this.api}/${authType}`, data);
+    return this.http.post<User>(`${this.api}/${authType}`, data).pipe(
+      mergeMap((user: User) => {
+        this.token = user.token;
+        return of(user);
+      })
+    );
   }
 
   login(data: AuthDTO): Observable<User> {
     return this.auth('login', data);
-
   }
 
   register(data: AuthDTO): Observable<User> {

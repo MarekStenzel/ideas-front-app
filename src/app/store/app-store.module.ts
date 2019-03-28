@@ -6,7 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { errorReducer, ErrorState } from '@app/store/reducers/errors.reducer';
 import { AuthEffects } from '@app/store/effects/auth.effect';
-import { AuthState } from '@app/store/reducers/auth.reducer';
+import { authReducer, AuthState } from '@app/store/reducers/auth.reducer';
 
 export interface AppState {
   error: ErrorState;
@@ -14,12 +14,13 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<any> = {
-  error: errorReducer
+  error: errorReducer,
+  auth: authReducer
 };
 
 export const effects = [
   AuthEffects
-]
+];
 
 @NgModule({
   imports: [
